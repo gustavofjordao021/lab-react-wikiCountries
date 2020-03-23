@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import { Link, Route } from 'react-router-dom';
 import CountryDetail from './CountryDetail/countryDetail';
 import CountryList from './CountryList/countryList'
+import Countries from './countries.json'
 import './App.css';
 
 class App extends Component {
   state = {
+    allCountries: [...Countries],
     countryPicked: []
   }
 
@@ -13,6 +15,13 @@ class App extends Component {
     let countryList = countrySelected;
     this.setState({
       countryPicked: countryList
+    })
+  }
+
+  getSecondCountry = secondCountrySelected => {
+    let secondCountryList = this.state.allCountries.filter(country => country.cca3 === secondCountrySelected);
+    this.setState({
+      countryPicked: secondCountryList
     })
   }
 
@@ -30,7 +39,8 @@ class App extends Component {
               <CountryList passedDownGetCountry={countrySelected => this.getCountry(countrySelected)}/>
             </div>
             <div className="col-7">
-              <Route render={() => <CountryDetail {...this.state.countryPicked}/>}/>
+            {console.log(this.state.countryPicked)}
+              <Route render={() => <CountryDetail {...this.state.countryPicked} passedDownSecondGetCountry={secondCountrySelected => this.getSecondCountry(secondCountrySelected)}/>}/>
             </div>
         </div>
       </div>

@@ -32,7 +32,7 @@ class CountryDetail extends Component {
                         <ul>
                         {borders.map((eachBorder, index) => {
                             return (
-                                <li key={index}><CountryDetail eachBorder /></li>
+                                <li key={index}><Link to={`/${eachBorder}`} onClick={() => this.props.passedDownSecondGetCountry(eachBorder)}>Test</Link></li>
                             )
                         })}
                         </ul>
