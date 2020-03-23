@@ -8,7 +8,7 @@ import './App.css';
 class App extends Component {
   state = {
     allCountries: [...Countries],
-    countryPicked: []
+    countryPicked: ""
   }
 
   getCountry = countrySelected => {
@@ -20,8 +20,9 @@ class App extends Component {
 
   getSecondCountry = secondCountrySelected => {
     let secondCountryList = this.state.allCountries.filter(country => country.cca3 === secondCountrySelected);
+    let newCountry = secondCountryList[0]
     this.setState({
-      countryPicked: secondCountryList
+      countryPicked: newCountry
     })
   }
 

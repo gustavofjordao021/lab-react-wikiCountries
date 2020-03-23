@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import Countries from '../countries.json'
 import { Link } from 'react-router-dom';
 import './countryDetail.css';
 
 class CountryDetail extends Component {
     state = {
-        countrySelected: this.props
+        countrySelected: this.props,
+        allCountries: Countries
     }
     
     render() {
@@ -32,7 +34,9 @@ class CountryDetail extends Component {
                         <ul>
                         {borders.map((eachBorder, index) => {
                             return (
-                                <li key={index}><Link to={`/${eachBorder}`} onClick={() => this.props.passedDownSecondGetCountry(eachBorder)}>Test</Link></li>
+                                <li key={index}><Link to={`/${eachBorder}`} onClick={() => this.props.passedDownSecondGetCountry(eachBorder)}>{
+                                    (this.state.allCountries.filter(country => country.cca3 === eachBorder))[0].name.common
+                                    }</Link></li>
                             )
                         })}
                         </ul>
