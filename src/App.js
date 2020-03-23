@@ -26,12 +26,19 @@ class App extends Component {
     })
   }
 
+  clearPage = () => {
+    this.setState({
+      allCountries: [...Countries],
+      countryPicked: ""
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <nav className="navbar navbar-dark bg-primary mb-3">
           <div className="container">
-            <span className="navbar-brand"><Link style={{color: "white"}} to="/">WikiCountries</Link></span>
+            <span className="navbar-brand"><Link onClick={() => this.clearPage()} style={{color: "white"}} to="/">WikiCountries</Link></span>
           </div>
         </nav>
         <div className="container">
@@ -40,7 +47,6 @@ class App extends Component {
               <CountryList passedDownGetCountry={countrySelected => this.getCountry(countrySelected)}/>
             </div>
             <div className="col-7">
-            {console.log(this.state.countryPicked)}
               <Route render={() => <CountryDetail {...this.state.countryPicked} passedDownSecondGetCountry={secondCountrySelected => this.getSecondCountry(secondCountrySelected)}/>}/>
             </div>
         </div>
